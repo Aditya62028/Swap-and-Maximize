@@ -1,0 +1,27 @@
+import java.util.Arrays;
+public class MaxSumAbsoluteDifferences {
+    public static int maxSumOfDifferences(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int[] shuffled = new int[n];
+        int left = 0;
+        int right = n - 1;
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                shuffled[i] = arr[right--];
+            } else {
+                shuffled[i] = arr[left++];
+            }
+        }
+        int maxSum = 0;
+        for (int i = 0; i < n; i++) {
+            maxSum += Math.abs(shuffled[i] - shuffled[(i + 1) % n]);
+        }
+        return maxSum;
+    }
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 1, 8};
+        int result = maxSumOfDifferences(arr);
+        System.out.println("Maximum sum of absolute differences is: " + result); 
+    }
+}
